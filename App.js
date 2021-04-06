@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
+import LocationDisplay from './src/components/locationDisplayComponent';
 
 export default class App extends React.Component {
   state = {
@@ -15,14 +16,21 @@ export default class App extends React.Component {
     ]
   }
 
-
+ 
 
 
 
   render() {
+
+function Console (){
+  console.log('hello')
+}
     return (
+      <>
       <MapView
-        provider={PROVIDER_GOOGLE}
+      showsUserLocation
+      followsUserLocation
+        // provider={PROVIDER_GOOGLE}
         style={styles.map}
         showsUserLocation
         initialRegion={{
@@ -37,7 +45,9 @@ export default class App extends React.Component {
           title={'moms house'}>
 
         </Marker>
+       <LocationDisplay/>
       </MapView>
+      </>
     );
   }
 }
@@ -48,5 +58,4 @@ const styles = StyleSheet.create({
     height: '100%'
   }
 })
-
 
