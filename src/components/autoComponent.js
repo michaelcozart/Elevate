@@ -20,6 +20,7 @@ const PlaceInput = () => {
 export default PlaceInput;
 const styles = StyleSheet.create({
    input: {
-     marginTop: 50,
+     marginTop: 100,
+     flex: 1
    }
 })

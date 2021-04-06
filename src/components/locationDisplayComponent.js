@@ -134,11 +134,11 @@ const LocationDisplay = () => {
               uri:
                 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/location.png',
             }}
-            style={{width: 100, height: 100}}
+            style={{width: 20, height: 20}}
           />
-          {/* <Text style={styles.boldText}>
+          <Text style={styles.boldText}>
             {locationStatus}
-          </Text> */}
+          </Text>
           <Text
             style={{
               justifyContent: 'center',
@@ -175,12 +175,12 @@ const LocationDisplay = () => {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'relative',
-    top:250,
+    position: 'absolute',
     
-    padding: 10,
     alignItems: 'center',
-    justifyContent: 'center',
+    right:50,
+    padding: 10,
+    
   },
   boldText: {
    
