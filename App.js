@@ -8,6 +8,7 @@ function App() {
     <View style={styles.container}>
       <Text style={styles.text}>Add your name to the list below :) </Text>
       <Text style={styles.text}>- Austin Hill</Text>
+      <Text style={styles.text}>- Tamara Eaton</Text>
     </View>
   );
 }
