@@ -1,7 +1,6 @@
-
-import React, { useState, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, {useState, useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   Text,
   SafeAreaView,
@@ -9,54 +8,66 @@ import {
   View,
   Image,
   PermissionsAndroid,
-  Platform
-} from "react-native";
+  Platform,
+} from 'react-native';
 
-import MapScreen from "./MapScreen";
-function HomeScreen({ navigation }) {
-  const [hasMapPermissions, setHasMapPermissions] = useState(false)
+import MapScreen from './MapScreen';
+function HomeScreen({navigation}) {
+  const [hasMapPermissions, setHasMapPermissions] = useState(false);
 
   useEffect(() => {
-
-    requestLocationPermission()
-  }, [])
+    requestLocationPermission();
+  }, []);
 
   const requestLocationPermission = async () => {
     try {
       if (Platform.OS === 'android') {
-        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          setHasMapPermissions(true)
+          setHasMapPermissions(true);
         }
       } else {
-        setHasMapPermissions(true)
+        setHasMapPermissions(true);
       }
     } catch (err) {
       console.warn(err);
     }
-  }
+  };
 
   return (
     <>
-      {hasMapPermissions ? <>
-
-        <MapScreen />
-      </> : null}
+      {hasMapPermissions ? (
+        <>
+          <MapScreen />
+        </>
+      ) : null}
     </>
-  )
-};
+  );
+}
 
-
-const elevationExplanation = require('./assets/elevationExplanation.png')
-function AboutScreen({ route }) {
+const elevationExplanation = require('./assets/elevationExplanation.png');
+function AboutScreen({route}) {
   return (
-    <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
+    <SafeAreaView
+      style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <View style={styles.container}>
-        <Text style={{ margin: 20 }}>HEIGHT is the vertical distance of a point to a horizontal surface. ELEVATION is the height of a point above (or below) sea level. SEA LEVEL or, as it is more usually called, mean sea level, is the average height of the surface of the sea.</Text>
+        <Text style={{margin: 20}}>
+          HEIGHT is the vertical distance of a point to a horizontal surface.
+          ELEVATION is the height of a point above (or below) sea level. SEA
+          LEVEL or, as it is more usually called, mean sea level, is the average
+          height of the surface of the sea.
+        </Text>
         <Image
           source={elevationExplanation}
-          style={styles.image}
+          style={{
+            width: '100%',
+            height: 350,
+            alignSelf: 'center',
+            padding: 20,
+            resizeMode: 'contain',
+          }}
         />
       </View>
     </SafeAreaView>
@@ -69,8 +80,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
+        screenOptions={({route}) => ({
+          tabBarIcon: ({focused, color, size}) => {
             let iconName;
             if (route.name === 'Home') {
               iconName = focused
@@ -82,13 +93,15 @@ export default function App() {
                 ? require('./assets/map.png')
                 : require('./assets/user.png');
             }
-            return <Image
-              source={iconName}
-              style={{ width: 20, height: 20 }}
-              resizeMode="contain" />;
+            return (
+              <Image
+                source={iconName}
+                style={{width: 20, height: 20}}
+                resizeMode="contain"
+              />
+            );
           },
-        })}
-      >
+        })}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="About" component={AboutScreen} />
       </Tab.Navigator>
@@ -103,4 +116,3 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
